@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GRID</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="header">
+    <div class="header-menu">
+        <ul>
+            <li class="home"><a href="#">Aurelia</a></li>
+            <li><a href="#">Welcome</a></li>
+            <li><a href="#">Github Users</a></li>
+            <li><a href="#">KendoUI autocomplete</a></li>
+            <li><a href="#">KendoUI button</a></li>
+            <li><a href="#">KendoUI chart</a></li>
+            <li class="active"><a href="#">KendoUI grid</a></li>
+            <li><a href="#">Child Router</a></li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <h2>Basic KendoUI Grid Sample</h2>
+    <div class="grid">
+        <div class="grid-tbl">
+            <div class="tbl-head">
+                <div class="tbl-row">
+                    <p>Contact Name</p>
+                    <p>Contact Name</p>
+                    <p>Contact Title</p>
+                    <p>Company Name</p>
+                    <p>Country</p>
+                </div>
+            </div>
+            <div class="tbl-body">
+                <div class="scroll vertical-scroll">
+                    <span tabindex="-1" class="scroll-thumb"></span>
+                </div>
+                <div class="tbl-data">
+                    <div class="tbl-data-in">
+                        <div class="tbl-row">
+                            <p>Maria Anders</p>
+                            <p>Maria Anders</p>
+                            <p>Sales Representative</p>
+                            <p>Alfreds Futterkiste</p>
+                            <p>Germany</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Anna Trujillo</p>
+                            <p>Anna Trujillo</p>
+                            <p>Owner</p>
+                            <p>Anna Trujillo Emparedados y helados</p>
+                            <p>Mexico</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Antonio Moreno</p>
+                            <p>Antonio Moreno</p>
+                            <p>Owner</p>
+                            <p>Antonio Moreno Taqueria</p>
+                            <p>Mexico</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Thomas Hardy</p>
+                            <p>Thomas Hardy</p>
+                            <p>Sales Representative</p>
+                            <p>Around the Horn</p>
+                            <p>UK</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Christina Berglund</p>
+                            <p>Christina Berglund</p>
+                            <p>Order Administrator</p>
+                            <p>Berglunds</p>
+                            <p>Sweden</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Hanna Moos</p>
+                            <p>Hanna Moos</p>
+                            <p>Sales Representative</p>
+                            <p>Blauer See Delikatessen</p>
+                            <p>Germany</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Hanna Moos</p>
+                            <p>Hanna Moos</p>
+                            <p>Sales Representative</p>
+                            <p>Blauer See Delikatessen</p>
+                            <p>Germany</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Martin Sommer</p>
+                            <p>Martin Sommer</p>
+                            <p>Owner</p>
+                            <p>Blauer See Delikatessen</p>
+                            <p>Spain</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Laurence Lebihan</p>
+                            <p>Laurence Lebihan</p>
+                            <p>Owner</p>
+                            <p>Bon app</p>
+                            <p>France</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Elizabeth Lincoln</p>
+                            <p>Elizabeth Lincoln</p>
+                            <p>Accounting Manager</p>
+                            <p>Bottom Dollar Markets</p>
+                            <p>Canada</p>
+                        </div>
+                        <div class="tbl-row">
+                            <p>Elizabeth Lincoln</p>
+                            <p>Elizabeth Lincoln</p>
+                            <p>Accounting Manager</p>
+                            <p>Bottom Dollar Markets</p>
+                            <p>Canada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pager">
+            <div class="pagination">
+                <span title="First page" class="first-page">&#x25c4</span>
+                <span title="Previous page" class="prev-page">&#x25c4</span>
+                <ul>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                </ul>
+                <span title="Next page" class="next-page">&#x25ba</span>
+                <span title="Last page" class="last-page">&#x25ba</span>
+            </div>
+            <div class="items-per-page">
+                <select>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+                <span>items per page</span>
+            </div>
+            <p class="items-count">1-10 of 91 items</p>
+        </div>
+    </div>
+</div>
+<script src="js/module.js"></script>
+<script src="js/components/grid.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

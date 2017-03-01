@@ -81,6 +81,8 @@
         constructor: Grid,
         makeVerticalScrollable: function() {
             var gridElement = this._gridElement;
+            gridElement.classList.add('v-scrollable');
+
             var vScroll = gridElement.querySelector('.vertical-scroll');
             var vScrollY = vScroll.getBoundingClientRect().top + pageYOffset;
             var vScrollHeight = vScroll.offsetHeight;

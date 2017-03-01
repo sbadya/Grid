@@ -50,31 +50,17 @@ body {
           border: 2px solid #e8e8e8; border-radius: 5px; font-size: 0; width: 100%;
         }
              .grid-tbl .tbl-head {
-                background: #f5f5f5; padding: 0 16px 0 0;
+                background: #f5f5f5;
              }
              .grid-tbl .tbl-body {
-                 border-top: 1px solid #e0e0e0; position: relative; padding: 0 16px 0 0;
+                 border-top: 1px solid #e0e0e0; position: relative;
              }
-                .grid-tbl .tbl-body .vertical-scroll {
-                    width: 16px; height: 100%; top: 0; right: 0;
-                }
-                    .grid-tbl .tbl-body .vertical-scroll .scroll-thumb {
-                        top: 0; width: 12px; left: 50%; margin: 0 0 0 -6px;  height: 100px;
-                    }
-
                 .grid-tbl .tbl-body .tbl-data {
                     overflow: hidden; height: 300px;
                 }
                     .grid-tbl .tbl-data .tbl-row:nth-child(2n) {
                         background: #f5f5f5;
                     }
-
-            .grid-tbl .scroll {
-                background: #9e9e9e; cursor: default; position: absolute; opacity: .5;
-            }
-                .grid-tbl .scroll .scroll-thumb {
-                    background: #e7e7e7; position: absolute;
-                }
 
             .grid-tbl .tbl-row {
                 width: 100%; display: table; table-layout: fixed;
@@ -87,6 +73,26 @@ body {
                 border-right: none;
             }
 
+            .grid .scroll {
+                background: #9e9e9e; cursor: default; display: none; position: absolute; opacity: .5;
+            }
+                .grid .scroll .scroll-thumb {
+                    background: #e7e7e7; position: absolute;
+                }
+
+            .grid .vertical-scroll {
+                width: 16px; height: 100%; top: 0; right: 0;
+            }
+                .grid .vertical-scroll .scroll-thumb {
+                    top: 0; width: 12px; left: 50%; margin: 0 0 0 -6px;  height: 100px;
+                }
+
+            .grid.v-scrollable .tbl-head, .grid.v-scrollable .tbl-body {
+                padding: 0 16px 0 0;
+            }
+            .grid.v-scrollable .vertical-scroll {
+                display: block;
+            }
             .grid .pager {
                 background: #f5f5f5; padding: 5px; overflow: hidden; border-top: 1px solid #e0e0e0;
             }

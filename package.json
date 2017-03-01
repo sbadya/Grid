@@ -1,0 +1,11 @@
+{
+  "name": "Grid Control",
+  "version": "1.0.0",
+  "description": "Grid has been written on pure js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vadim Sokolovski",
+  "license": "ISC"
+}

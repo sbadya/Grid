@@ -37,87 +37,7 @@
                 <div class="scroll vertical-scroll">
                     <span tabindex="-1" class="scroll-thumb"></span>
                 </div>
-                <div class="tbl-data">
-                    <div class="tbl-data-in">
-                        <div class="tbl-row">
-                            <p>Maria Anders</p>
-                            <p>Maria Anders</p>
-                            <p>Sales Representative</p>
-                            <p>Alfreds Futterkiste</p>
-                            <p>Germany</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Anna Trujillo</p>
-                            <p>Anna Trujillo</p>
-                            <p>Owner</p>
-                            <p>Anna Trujillo Emparedados y helados</p>
-                            <p>Mexico</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Antonio Moreno</p>
-                            <p>Antonio Moreno</p>
-                            <p>Owner</p>
-                            <p>Antonio Moreno Taqueria</p>
-                            <p>Mexico</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Thomas Hardy</p>
-                            <p>Thomas Hardy</p>
-                            <p>Sales Representative</p>
-                            <p>Around the Horn</p>
-                            <p>UK</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Christina Berglund</p>
-                            <p>Christina Berglund</p>
-                            <p>Order Administrator</p>
-                            <p>Berglunds</p>
-                            <p>Sweden</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Hanna Moos</p>
-                            <p>Hanna Moos</p>
-                            <p>Sales Representative</p>
-                            <p>Blauer See Delikatessen</p>
-                            <p>Germany</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Hanna Moos</p>
-                            <p>Hanna Moos</p>
-                            <p>Sales Representative</p>
-                            <p>Blauer See Delikatessen</p>
-                            <p>Germany</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Martin Sommer</p>
-                            <p>Martin Sommer</p>
-                            <p>Owner</p>
-                            <p>Blauer See Delikatessen</p>
-                            <p>Spain</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Laurence Lebihan</p>
-                            <p>Laurence Lebihan</p>
-                            <p>Owner</p>
-                            <p>Bon app</p>
-                            <p>France</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Elizabeth Lincoln</p>
-                            <p>Elizabeth Lincoln</p>
-                            <p>Accounting Manager</p>
-                            <p>Bottom Dollar Markets</p>
-                            <p>Canada</p>
-                        </div>
-                        <div class="tbl-row">
-                            <p>Elizabeth Lincoln</p>
-                            <p>Elizabeth Lincoln</p>
-                            <p>Accounting Manager</p>
-                            <p>Bottom Dollar Markets</p>
-                            <p>Canada</p>
-                        </div>
-                    </div>
-                </div>
+                <div class="tbl-data"></div>
             </div>
         </div>
         <div class="pager">
@@ -144,7 +64,7 @@
             <div class="items-per-page">
                 <select>
                     <option value="5">5</option>
-                    <option value="10">10</option>
+                    <option selected value="10">10</option>
                     <option value="15">15</option>
                 </select>
                 <span>items per page</span>
@@ -153,6 +73,32 @@
         </div>
     </div>
 </div>
+<script src="node_modules/mustache/mustache.min.js"></script>
+<script id="grid-main-template" type="x-tmpl-mustache">
+{{#.}}
+<div class="tbl-data-in">
+    {{#visible}}
+        {{>partialTemplate}}
+    {{/visible}}
+</div>
+<div class="tbl-data-in hidden">
+    {{#hidden}}
+        {{>partialTemplate}}
+    {{/hidden}}
+</div>
+{{/.}}
+</script>
+<script id="grid-partial-template" type="x-tmpl-mustache">
+{{#.}}
+<div class="tbl-row">
+    <p>{{name}}</p>
+    <p>{{contactName}}</p>
+    <p>{{contactTitle}}</p>
+    <p>{{companyName}}</p>
+    <p>{{country}}</p>
+</div>
+{{/.}}
+</script>
 <script src="js/module.js"></script>
 <script src="js/components/grid.js"></script>
 <script src="js/app.js"></script>

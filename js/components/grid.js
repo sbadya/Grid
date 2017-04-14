@@ -1,13 +1,14 @@
 (function(externalParent) {
     var GridHelper = {
         initialize: function(data) {
-            var itemsCountSelector = document.querySelector('.items-per-page > select');
+            var gridElement = this._gridElement;
+            var dataContainer = gridElement.querySelector('.tbl-data');
+
+            var itemsCountSelector = gridElement.querySelector('.items-per-page > select');
             var itemsCount = +itemsCountSelector.options[itemsCountSelector.selectedIndex].value;
 
             var mainTemplate = document.getElementById('grid-main-template').innerHTML;
             var partialTemplate = document.getElementById('grid-partial-template').innerHTML;
-
-            var dataContainer = document.querySelector('.tbl-data');
 
             var viewTemplate = function(itemsCount) {
                 var html = Mustache.render(mainTemplate, {
@@ -16,15 +17,16 @@
                 }, {partialTemplate: partialTemplate});
 
                 dataContainer.innerHTML = html;
-                var dataInContainer = dataContainer.querySelector('.tbl-data-in');
-                var hiddenContainer = dataContainer.querySelector('.tbl-data-in.hidden');
+                var dataInContainer = gridElement.querySelector('.tbl-data-in');
+                var hiddenContainer = gridElement.querySelector('.tbl-data-in.hidden');
 
                 dataContainer.style.height = dataInContainer.offsetHeight + 'px';
                 hiddenContainer.style.top = dataInContainer.offsetTop + dataInContainer.offsetHeight + 'px';
             };
+
             viewTemplate(itemsCount);
         },
-        moveThumb: function(position, scrollThumb, scrollHeight) {
+        moveThumb: function(position, scrollThumb, scrollHeight, renderGrid) {
             var thumbHeight = scrollThumb.offsetHeight;
             var top;
 
@@ -39,6 +41,17 @@
             }
 
             scrollThumb.style.top = top + 'px';
+            renderGrid();
+        },
+        getRenderGrid: function() {
+            var gridElement = this._gridElement;
+            var dataContainer = gridElement.querySelector('.tbl-data');
+            var dataInContainer = gridElement.querySelector('.tbl-data-in');
+            var hiddenContainer = gridElement.querySelector('.tbl-data-in.hidden');
+
+            return function() {
+
+            };
         }
     };
 
@@ -47,6 +60,7 @@
             event.preventDefault();
         },
         handleFocusY: function(scrollY, scrollHeight, scrollThumb) {
+            var renderGrid = GridHelper.getRenderGrid.call(this);
             var keyDownHandler = function(event) {
                 event.preventDefault();
 
@@ -54,10 +68,10 @@
                 var key = event.which;
 
                 if (key === 38) {
-                    GridHelper.moveThumb(--position, scrollThumb, scrollHeight);
+                    GridHelper.moveThumb(--position, scrollThumb, scrollHeight, renderGrid);
 
                 } else if (key === 40) {
-                    GridHelper.moveThumb(++position, scrollThumb, scrollHeight);
+                    GridHelper.moveThumb(++position, scrollThumb, scrollHeight, renderGrid);
                 }
             };
             scrollThumb.addEventListener('keydown', keyDownHandler);
@@ -67,6 +81,7 @@
             });
         },
         handleMouseDownY: function (scrollY, scrollHeight, scrollThumb, event) {
+            var renderGrid = GridHelper.getRenderGrid.call(this);
             event.preventDefault();
 
             if (event.target === scrollThumb) {
@@ -77,7 +92,7 @@
 
                 var mouseMoveHandler = function(event) {
                     var position = event.pageY - scrollY - scrollThumbOffset;
-                    GridHelper.moveThumb(position, scrollThumb, scrollHeight);
+                    GridHelper.moveThumb(position, scrollThumb, scrollHeight, renderGrid);
                 };
 
                 gridElement.addEventListener('mousemove', mouseMoveHandler);
@@ -90,7 +105,7 @@
 
             } else if (event.target === scrollThumb.parentNode) {
                 var position = event.pageY - scrollY - scrollThumb.offsetHeight/2;
-                GridHelper.moveThumb(position, scrollThumb, scrollHeight);
+                GridHelper.moveThumb(position, scrollThumb, scrollHeight, renderGrid);
             }
         }
     };
@@ -102,7 +117,7 @@
 
         this._gridElement = document.querySelector('.grid');
 
-        GridHelper.initialize(data);
+        GridHelper.initialize.call(this, data);
         this.makeVerticalScrollable();
     }
 
@@ -122,7 +137,7 @@
 
             document.ondragstart = preventDefaultBehavior;
             vScroll.addEventListener('mousedown', mouseDownHandler.bind(this, vScrollY, vScrollHeight, vScrollThumb));
-            vScrollThumb.addEventListener('focus', focusHandler.bind(null, vScrollY, vScrollHeight, vScrollThumb));
+            vScrollThumb.addEventListener('focus', focusHandler.bind(this, vScrollY, vScrollHeight, vScrollThumb));
         },
         disableVerticalScroll: function() {
             this._gridElement.classList.remove('v-scrollable');

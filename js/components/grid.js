@@ -141,7 +141,9 @@
         },
         disableVerticalScroll: function() {
             this._gridElement.classList.remove('v-scrollable');
-        }
+        },
+        makeHorizontalScrollable: function() {},
+        disableHorizontalScroll: function() {}
     };
 
     Grid.prototype = Prototype;

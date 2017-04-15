@@ -28,19 +28,15 @@
         },
         moveThumb: function(position, scrollThumb, scrollHeight, renderGrid) {
             var thumbHeight = scrollThumb.offsetHeight;
-            var top;
 
             if (position <= 0) {
-                top = 0;
+                position = 0;
 
             } else if (position + thumbHeight >= scrollHeight) {
-                top = scrollHeight - thumbHeight;
-
-            } else {
-                top = position;
+                position = scrollHeight - thumbHeight;
             }
 
-            scrollThumb.style.top = top + 'px';
+            scrollThumb.style.top = position + 'px';
             renderGrid();
         },
         getRenderGrid: function() {
@@ -131,13 +127,9 @@
             var vScrollHeight = vScroll.offsetHeight;
             var vScrollThumb = vScroll.querySelector('.scroll-thumb');
 
-            var preventDefaultBehavior = EventHelper.preventDefaultBehavior;
-            var mouseDownHandler = EventHelper.handleMouseDownY;
-            var focusHandler = EventHelper.handleFocusY;
-
-            document.ondragstart = preventDefaultBehavior;
-            vScroll.addEventListener('mousedown', mouseDownHandler.bind(this, vScrollY, vScrollHeight, vScrollThumb));
-            vScrollThumb.addEventListener('focus', focusHandler.bind(this, vScrollY, vScrollHeight, vScrollThumb));
+            document.ondragstart = EventHelper.preventDefaultBehavior;
+            vScroll.addEventListener('mousedown', EventHelper.handleMouseDownY.bind(this, vScrollY, vScrollHeight, vScrollThumb));
+            vScrollThumb.addEventListener('focus', EventHelper.handleFocusY.bind(this, vScrollY, vScrollHeight, vScrollThumb));
         },
         disableVerticalScroll: function() {
             this._gridElement.classList.remove('v-scrollable');

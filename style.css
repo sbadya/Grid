@@ -88,7 +88,7 @@ body {
                 width: 16px; height: 100%; top: 0; right: 0;
             }
                 .grid .vertical-scroll .scroll-thumb {
-                    top: 0; width: 12px; left: 50%; margin: 0 0 0 -6px;  height: 50px;
+                    top: 0; width: 12px; left: 50%; margin: 0 0 0 -6px; height: 30px;
                 }
 
             .grid.v-scrollable .tbl-head, .grid.v-scrollable .tbl-body {

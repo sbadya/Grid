@@ -2,6 +2,8 @@
     var GridHelper = {
         initialize: function(data) {
             var gridElement = this._gridElement;
+            var vScroll = gridElement.querySelector('.vertical-scroll');
+            var vScrollThumb = gridElement.querySelector('.scroll-thumb');
             var dataContainer = gridElement.querySelector('.tbl-data');
 
             var itemsCountSelector = gridElement.querySelector('.items-per-page > select');
@@ -37,16 +39,20 @@
             }
 
             scrollThumb.style.top = position + 'px';
-            renderGrid();
+            renderGrid(position);
         },
         getRenderGrid: function() {
             var gridElement = this._gridElement;
-            var dataContainer = gridElement.querySelector('.tbl-data');
             var dataInContainer = gridElement.querySelector('.tbl-data-in');
             var hiddenContainer = gridElement.querySelector('.tbl-data-in.hidden');
+            var prevPosition = 0;
 
-            return function() {
-
+            //Grid's render function
+            return function(position) {
+                var scrollCount = position - prevPosition;
+                dataInContainer.style.top = dataInContainer.offsetTop - scrollCount + 'px';
+                hiddenContainer.style.top = hiddenContainer.offsetTop - scrollCount + 'px';
+                prevPosition = position;
             };
         }
     };
@@ -56,7 +62,6 @@
             event.preventDefault();
         },
         handleFocusY: function(scrollY, scrollHeight, scrollThumb) {
-            var renderGrid = GridHelper.getRenderGrid.call(this);
             var keyDownHandler = function(event) {
                 event.preventDefault();
 
@@ -120,13 +125,21 @@
     var Prototype = {
         constructor: Grid,
         makeVerticalScrollable: function() {
-            this._gridElement.classList.add('v-scrollable');
+            var gridElement = this._gridElement;
+            gridElement.classList.add('v-scrollable');
 
-            var vScroll = this._gridElement.querySelector('.vertical-scroll');
+            var vScroll = gridElement.querySelector('.vertical-scroll');
             var vScrollY = vScroll.getBoundingClientRect().top + pageYOffset;
             var vScrollHeight = vScroll.offsetHeight;
             var vScrollThumb = vScroll.querySelector('.scroll-thumb');
+            var setThumbHeight = function() {
+                var hiddenContainer = gridElement.querySelector('.tbl-data-in.hidden');
+                var thumbInitHeight = parseInt(getComputedStyle(vScrollThumb).height, 10);
+                var heightDiff = vScrollHeight - hiddenContainer.offsetHeight;
+                vScrollThumb.style.height = (heightDiff > thumbInitHeight ? heightDiff : thumbInitHeight) + 'px';
+            };
 
+            setThumbHeight();
             document.ondragstart = EventHelper.preventDefaultBehavior;
             vScroll.addEventListener('mousedown', EventHelper.handleMouseDownY.bind(this, vScrollY, vScrollHeight, vScrollThumb));
             vScrollThumb.addEventListener('focus', EventHelper.handleFocusY.bind(this, vScrollY, vScrollHeight, vScrollThumb));

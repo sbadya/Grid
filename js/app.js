@@ -2,11 +2,11 @@
     // Test data
     var getData = function() {
         var data = [];
-        var length = 50;
+        var length = 15;
 
         for (var i = 0; i < length; i++) {
             data.push({
-                name: 'Anna Trujillo',
+                name: i + 1 + '. Anna Trujillo',
                 contactName: 'Anna Trujillo',
                 contactTitle: 'Owner',
                 companyName: 'Anna Trujillo Emparedados y helados',

@@ -61,7 +61,7 @@
         preventDefaultBehavior: function(event) {
             event.preventDefault();
         },
-        handleFocusY: function(scrollY, scrollHeight, scrollThumb) {
+        handleFocusY: function(scrollY, scrollHeight, scrollThumb, renderGrid) {
             var keyDownHandler = function(event) {
                 event.preventDefault();
 
@@ -81,8 +81,7 @@
                 this.removeEventListener('keydown', keyDownHandler);
             });
         },
-        handleMouseDownY: function (scrollY, scrollHeight, scrollThumb, event) {
-            var renderGrid = GridHelper.getRenderGrid.call(this);
+        handleMouseDownY: function (scrollY, scrollHeight, scrollThumb, renderGrid, event) {
             event.preventDefault();
 
             if (event.target === scrollThumb) {
@@ -132,6 +131,7 @@
             var vScrollY = vScroll.getBoundingClientRect().top + pageYOffset;
             var vScrollHeight = vScroll.offsetHeight;
             var vScrollThumb = vScroll.querySelector('.scroll-thumb');
+            var renderGrid = GridHelper.getRenderGrid.call(this);
             var setThumbHeight = function() {
                 var hiddenContainer = gridElement.querySelector('.tbl-data-in.hidden');
                 var thumbInitHeight = parseInt(getComputedStyle(vScrollThumb).height, 10);
@@ -141,8 +141,10 @@
 
             setThumbHeight();
             document.ondragstart = EventHelper.preventDefaultBehavior;
-            vScroll.addEventListener('mousedown', EventHelper.handleMouseDownY.bind(this, vScrollY, vScrollHeight, vScrollThumb));
-            vScrollThumb.addEventListener('focus', EventHelper.handleFocusY.bind(this, vScrollY, vScrollHeight, vScrollThumb));
+            var mouseDownBinded = EventHelper.handleMouseDownY.bind(this, vScrollY, vScrollHeight, vScrollThumb, renderGrid);
+            var focusBinded = EventHelper.handleFocusY.bind(this, vScrollY, vScrollHeight, vScrollThumb, renderGrid);
+            vScroll.addEventListener('mousedown', mouseDownBinded);
+            vScrollThumb.addEventListener('focus', focusBinded);
         },
         disableVerticalScroll: function() {
             this._gridElement.classList.remove('v-scrollable');
